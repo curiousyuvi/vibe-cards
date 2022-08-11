@@ -5,7 +5,7 @@ import { actionTypes } from "../constants/actionTypes"
 
 const initialState: CardReducerState = {
     cards: [],
-    card: { id: "", name: "", bucketID: 0 },
+    card: { id: "", name: "", bucketID: "" },
     loading: true
 }
 

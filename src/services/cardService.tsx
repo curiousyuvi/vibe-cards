@@ -10,17 +10,34 @@ const getCards: () => Promise<Card[]> = async () => {
     return [];
   }
 };
-const getCard: (id: number) => Promise<Card> = async (id) => {
-  const data: Card = { id: "", bucketID: 0, name: "" };
-  return data;
+const deleteCard = async (id: string) => {
+  try {
+    await axiosInstance({ url: `/cards/${id}`, method: "delete" });
+  } catch (err) {
+    console.log("error:", err);
+  }
 };
-const deleteCard = (id: string) => {};
-const addCard = (card: Card) => {};
-const updateCard = (card: Card) => {};
+const addCard = async (card: Card) => {
+  try {
+    await axiosInstance({ url: "/cards", method: "post", data: card });
+  } catch (err) {
+    console.log("error:", err);
+  }
+};
+const updateCard = async (card: Card) => {
+  try {
+    await axiosInstance({
+      url: `/cards/${card.id}`,
+      method: "put",
+      data: card,
+    });
+  } catch (err) {
+    console.log("error:", err);
+  }
+};
 
 const CardAPI = {
   getCards,
-  getCard,
   deleteCard,
   addCard,
   updateCard,

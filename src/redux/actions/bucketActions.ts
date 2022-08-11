@@ -1,39 +1,7 @@
-import { AsyncThunkAction } from "@reduxjs/toolkit";
-import { Dispatch } from "react";
-import { Action, AnyAction } from "redux";
-import { ThunkDispatch } from "redux-thunk";
 import { Bucket } from "../../interfaces/Bucket";
-import { CardReducerState } from "../../interfaces/CardReducerState";
 import BucketAPI from "../../services/bucketService";
 import { actionTypes } from "../constants/actionTypes";
 
-export const addBucket = (bucket: Bucket) => {
-    return {
-        type: actionTypes.ADD_BUCKET,
-        payload: bucket
-    }
-};
-
-export const deleteBucket = (id: string) => {
-    return {
-        type: actionTypes.DELETE_BUCKET,
-        payload: id
-    }
-};
-
-export const updateBucket = (bucket: Bucket) => {
-    return {
-        type: actionTypes.UPDATE_BUCKET,
-        payload: bucket
-    }
-};
-
-export const getBucket = (id: string) => {
-    return {
-        type: actionTypes.GET_BUCKET,
-        payload: id
-    }
-};
 
 export const getBuckets = (buckets: Bucket[]) => {
     return {
@@ -42,7 +10,13 @@ export const getBuckets = (buckets: Bucket[]) => {
     }
 };
 
-// export type AsyncAction = (dispatch: (action: Action) => any) => void;
+export const getBucket = (bucket: Bucket) => {
+    return {
+        type: actionTypes.GET_BUCKET,
+        payload: bucket
+    }
+};
+
 
 export const fetchBuckets: () => any = () => {
     return async (dispatch: any) => {
@@ -50,4 +24,35 @@ export const fetchBuckets: () => any = () => {
         dispatch(getBuckets(buckets))
     }
 }
+
+export const fetchBucket: (id: string) => any = (id) => {
+    return async (dispatch: any) => {
+        const bucket = await BucketAPI.getBucket(id)
+        dispatch(getBucket(bucket))
+    }
+}
+
+
+export const addBucketAsync: (bucket: Bucket) => any = (bucket) => {
+    return async (dispatch: any) => {
+        await BucketAPI.addBucket(bucket)
+        dispatch(fetchBuckets())
+    }
+}
+
+export const updateBucketAsync: (bucket: Bucket) => any = (bucket) => {
+    return async (dispatch: any) => {
+        await BucketAPI.updateBucket(bucket)
+        dispatch(fetchBuckets())
+    }
+}
+
+export const deleteBucketAsync: (id: string) => any = (id) => {
+    return async (dispatch: any) => {
+        await BucketAPI.deleteBucket(id)
+        dispatch(fetchBuckets())
+    }
+}
+
+
 

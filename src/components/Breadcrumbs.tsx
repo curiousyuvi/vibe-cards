@@ -2,10 +2,16 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 import React from "react";
 import { BsChevronRight } from "react-icons/bs";
 import { TbHome } from "react-icons/tb";
-import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 
 const Breadcrumbs = () => {
-  const paths = useLocation().pathname.split("/");
+  const location = useLocation();
+  const isHistory = location.pathname === "/history";
+  const isHome = location.pathname === "/";
+  const bucketName = useSelector((state: any) => state.buckets.bucket.name);
+  const bucketID = useSelector((state: any) => state.buckets.bucket.id);
+
   return (
     <Breadcrumb
       spacing="8px"
@@ -15,28 +21,42 @@ const Breadcrumbs = () => {
       <BreadcrumbItem>
         <TbHome />
       </BreadcrumbItem>
-      <BreadcrumbItem>
-        <BreadcrumbLink href="/">BUCKETS</BreadcrumbLink>
-      </BreadcrumbItem>
+      {isHistory ? (
+        <BreadcrumbItem>
+          <Link className="hover:underline" to="/history">
+            HISTORY
+          </Link>
+        </BreadcrumbItem>
+      ) : (
+        <BreadcrumbItem>
+          <Link className="hover:underline" to="/">
+            BUCKETS
+          </Link>
+        </BreadcrumbItem>
+      )}
+      {!isHome ? (
+        <BreadcrumbItem>
+          <Link className="hover:underline" to={`/${bucketID}`}>
+            {bucketName.toUpperCase()}
+          </Link>
+        </BreadcrumbItem>
+      ) : (
+        <></>
+      )}
 
-      {paths.map((path, index) => {
-        if (index === 0) return <></>;
+      {/* {paths.map((path, index) => {
+          if (index === 0) return <></>;
         return (
           <BreadcrumbItem>
-            <BreadcrumbLink href={paths.slice(paths.length - index).join("/")}>
+            <Link
+              className="hover:underline"
+              to={paths.slice(paths.length - index).join("/")}
+            >
               {path.toUpperCase()}
-            </BreadcrumbLink>
+            </Link>
           </BreadcrumbItem>
         );
-      })}
-      {/* 
-      <BreadcrumbItem>
-        <BreadcrumbLink href="/">Buckets</BreadcrumbLink>
-      </BreadcrumbItem>
-
-      <BreadcrumbItem isCurrentPage>
-        <BreadcrumbLink href="#">Contact</BreadcrumbLink>
-      </BreadcrumbItem> */}
+      })} */}
     </Breadcrumb>
   );
 };

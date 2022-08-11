@@ -9,6 +9,7 @@ const Bucket = () => {
   const { bucket_id } = useParams();
   useEffect(() => {
     if (bucket_id) dispatch(fetchBucket(bucket_id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return <CardList />;
 };

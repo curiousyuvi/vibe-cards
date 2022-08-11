@@ -1,7 +1,7 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+import { Breadcrumb, BreadcrumbItem } from "@chakra-ui/react";
 import React from "react";
 import { BsChevronRight } from "react-icons/bs";
-import { TbHome } from "react-icons/tb";
+import { RiHome4Fill, RiHome4Line } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
@@ -19,7 +19,10 @@ const Breadcrumbs = () => {
       className="w-full h-16 p-4 border border-x-0 flex items-center justify-start"
     >
       <BreadcrumbItem>
-        <TbHome />
+        <Link className="group text-xl" to="/">
+          <RiHome4Line className="group-hover:hidden" />
+          <RiHome4Fill className="hidden group-hover:flex" />
+        </Link>
       </BreadcrumbItem>
       {isHistory ? (
         <BreadcrumbItem>
@@ -34,7 +37,7 @@ const Breadcrumbs = () => {
           </Link>
         </BreadcrumbItem>
       )}
-      {!isHome ? (
+      {!isHome && !isHistory ? (
         <BreadcrumbItem>
           <Link className="hover:underline" to={`/${bucketID}`}>
             {bucketName.toUpperCase()}

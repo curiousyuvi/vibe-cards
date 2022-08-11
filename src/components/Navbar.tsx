@@ -1,6 +1,5 @@
-import { Heading } from "@chakra-ui/react";
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { TbBucket, TbHistory } from "react-icons/tb";
 import NavbarButton from "./NavbarButton";
 

@@ -7,6 +7,7 @@ const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchBuckets());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return <BucketList />;
 };

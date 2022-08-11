@@ -10,7 +10,7 @@ const Navbar = () => {
     <div className="w-full flex rounded-xl border border-black/10  items-center overflow-hidden">
       <NavbarButton
         href="/"
-        title="BUTTON"
+        title="BUCKETS"
         icon={<TbBucket />}
         isHistoryPage={isHistoryPage}
       />

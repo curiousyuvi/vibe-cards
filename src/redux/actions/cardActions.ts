@@ -10,32 +10,32 @@ export const getCards = (cards: Card[]) => {
     }
 };
 
-export const fetchCards: () => any = () => {
+export const fetchCards: (bucketID: string) => any = (bucketID) => {
     return async (dispatch: any) => {
-        const cards = await CardAPI.getCards()
+        const cards = await CardAPI.getCards(bucketID)
         dispatch(getCards(cards))
     }
 }
 
-export const addCardAsync: (card: Card) => any = (card) => {
+export const addCardAsync: (card: Card, bucketID: string) => any = (card, bucketID) => {
     return async (dispatch: any) => {
         await CardAPI.addCard(card)
-        dispatch(fetchCards())
+        dispatch(fetchCards(bucketID))
     }
 }
 
-export const updateCardAsync: (card: Card) => any = (card) => {
+export const updateCardAsync: (card: Card, bucketID: string) => any = (card, bucketID) => {
     return async (dispatch: any) => {
         await CardAPI.updateCard(card)
-        dispatch(fetchCards())
+        dispatch(fetchCards(bucketID))
 
     }
 }
 
-export const deleteCardAsync: (id: string) => any = (id) => {
+export const deleteCardAsync: (id: string, bucketID: string) => any = (id, bucketID) => {
     return async (dispatch: any) => {
         await CardAPI.deleteCard(id)
-        dispatch(fetchCards())
+        dispatch(fetchCards(bucketID))
 
     }
 }

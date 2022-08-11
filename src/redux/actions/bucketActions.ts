@@ -1,6 +1,7 @@
 import { Bucket } from "../../interfaces/Bucket";
 import BucketAPI from "../../services/bucketService";
 import { actionTypes } from "../constants/actionTypes";
+import { fetchCards } from "./cardActions";
 
 
 export const getBuckets = (buckets: Bucket[]) => {
@@ -29,6 +30,7 @@ export const fetchBucket: (id: string) => any = (id) => {
     return async (dispatch: any) => {
         const bucket = await BucketAPI.getBucket(id)
         dispatch(getBucket(bucket))
+        dispatch(fetchCards(bucket.id))
     }
 }
 

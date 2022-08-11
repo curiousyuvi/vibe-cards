@@ -1,10 +1,10 @@
 import { Card } from "../interfaces/Card";
 import { axiosInstance } from "./axiosInstance";
 
-const getCards: () => Promise<Card[]> = async () => {
+const getCards: (bucketID: string) => Promise<Card[]> = async (bucketID) => {
   try {
     const response = await axiosInstance({ url: "/cards", method: "get" });
-    return response.data;
+    return response.data.filter((card: Card) => card.bucketID === bucketID);
   } catch (err) {
     console.log("error:", err);
     return [];

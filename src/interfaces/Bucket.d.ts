@@ -1,4 +1,4 @@
 export type Bucket = {
-  id: number;
+  id: string;
   name: string;
 };

@@ -1,5 +1,5 @@
 export type Card = {
-  id: number;
+  id: string;
   name: string;
-  bucketID: number;
+  bucketID: string;
 };

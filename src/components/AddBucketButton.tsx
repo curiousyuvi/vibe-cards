@@ -29,6 +29,7 @@ const AddBucketButton = () => {
     event.preventDefault();
     if (name.length >= 2) {
       dispatch(addBucketAsync({ name, id: generateURS() }));
+      setName("");
       onClose();
     } else {
       toast({

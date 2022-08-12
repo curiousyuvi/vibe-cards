@@ -19,7 +19,7 @@ const Breadcrumbs = () => {
       className="w-full h-16 p-4 border border-x-0 flex items-center justify-start"
     >
       <BreadcrumbItem>
-        <Link className="group text-xl" to="/">
+        <Link className="group text-lg" to="/">
           <RiHome4Line className="group-hover:hidden" />
           <RiHome4Fill className="hidden group-hover:flex" />
         </Link>
